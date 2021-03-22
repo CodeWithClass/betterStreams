@@ -13,12 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Soccer Streams',
       theme: ThemeData(
-          primarySwatch: Colors.orange,
           brightness: Brightness.dark,
-          // canvasColor: Colors.cyanAccent,
+          // primarySwatch: Colors.pink,
           textTheme: TextTheme(
               headline1: TextStyle(
-            fontSize: 16.0,
+            fontSize: 12.0,
             fontStyle: FontStyle.normal,
           ))),
       home: MyHomePage(title: 'SoccerStreams'),

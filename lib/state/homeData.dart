@@ -14,15 +14,21 @@ class MainDataNotifier extends ChangeNotifier {
   List rawData = [];
   List<Competition> _homeData = [];
   List<Competition> get homeData => _homeData;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   void _init() async {
+    _isLoading = true;
     var res = await getAllMatches();
     if (res.status) setData(res.data);
+    if (res.status != null) _isLoading = false;
   }
 
   void load() async {
+    _isLoading = true;
     var res = await getAllMatches();
     if (res.status) setData(res.data);
+    if (res.status != null) _isLoading = false;
   }
 
   void setData(val) {
@@ -34,32 +40,6 @@ class MainDataNotifier extends ChangeNotifier {
               this._homeData.add(Competition.fromMap(e))
             }
         });
-    notifyListeners();
-  }
-}
-
-class LoadingChangeNotifier extends ChangeNotifier {
-  bool show = true;
-  bool get isLoading => show;
-
-  LoadingChangeNotifier() {
-    _init(1000);
-  }
-
-  void _init(time) {
-    this.showLoader();
-
-    Future.delayed(Duration(milliseconds: time))
-        .then((onValue) => this.hideLoader());
-  }
-
-  void showLoader() {
-    this.show = true;
-    notifyListeners();
-  }
-
-  void hideLoader() {
-    this.show = false;
     notifyListeners();
   }
 }

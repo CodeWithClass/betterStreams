@@ -35,16 +35,27 @@ class Event extends StatelessWidget {
       padding: EdgeInsets.all(20),
       width: displayWidth(context) * 0.8,
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Padding(
+        Container(
+          width: displayWidth(context) * 0.2,
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(hName),
-        ),
-        Column(
-          children: [Text('$hScore  –  $vScore'), Text('$minute\'')],
+          child: Text(
+            hName,
+            textAlign: TextAlign.right,
+          ),
         ),
         Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [Text('$hScore  –  $vScore'), Text('$minute\'')],
+          ),
+        ),
+        Container(
+          width: displayWidth(context) * 0.2,
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(vName),
+          child: Text(
+            vName,
+            textAlign: TextAlign.left,
+          ),
         ),
       ]),
     );
