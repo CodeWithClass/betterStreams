@@ -14,9 +14,6 @@ class MyHomePage extends ConsumerWidget {
     final soccerData = watch(soccerDataProvider);
     final isLoading = watch(soccerDataProvider).isLoading;
 
-    print(isLoading);
-    print(soccerData.homeData.toString());
-
     return Scaffold(
       body: isLoading
           ? Center(
@@ -25,6 +22,8 @@ class MyHomePage extends ConsumerWidget {
                   ),
             )
           : ListView(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
               children: [
                 Text("BetterStreams",
                     style: Theme.of(context).textTheme.headline5),

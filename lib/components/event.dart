@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
 
 // ignore: must_be_immutable
-class Event extends StatelessWidget {
+class Event extends StatefulWidget {
   int id;
   int hScore;
   int vScore;
@@ -13,6 +13,7 @@ class Event extends StatelessWidget {
   String statusName;
   bool hasStreams;
   bool hasHighlights;
+  FocusNode focusNode = new FocusNode();
 
   Event.fromMap(Map data) {
     this.id = data['id'];
@@ -26,38 +27,60 @@ class Event extends StatelessWidget {
     this.hasStreams = data['hasStreams'];
     this.hasHighlights = data['hasHighlights'];
   }
+  @override
+  _Event createState() => _Event();
+}
+
+class _Event extends State<Event> {
+  bool _focused = false;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15), color: Colors.black54),
-      margin: EdgeInsets.symmetric(vertical: 20),
-      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(vertical: 10),
       width: displayWidth(context) * 0.8,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Container(
-          width: displayWidth(context) * 0.2,
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(
-            hName,
-            textAlign: TextAlign.right,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.transparent),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(18.0),
+            ))),
+        autofocus: true,
+        // focusNode: widget.focusNode,
+        onPressed: () {},
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Container(
+            width: displayWidth(context) * 0.2,
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              widget.hName,
+              textAlign: TextAlign.right,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [Text('$hScore  –  $vScore'), Text('$minute\'')],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                Text('${widget.hScore}  –  ${widget.vScore}'),
+                Text('${widget.minute}\'')
+              ],
+            ),
           ),
-        ),
-        Container(
-          width: displayWidth(context) * 0.2,
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(
-            vName,
-            textAlign: TextAlign.left,
+          Container(
+            width: displayWidth(context) * 0.2,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              widget.vName,
+              textAlign: TextAlign.left,
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }

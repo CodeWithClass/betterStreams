@@ -33,12 +33,10 @@ class MainDataNotifier extends ChangeNotifier {
 
   void setData(val) {
     rawData.addAll(jsonDecode(val));
+    var i = 1;
     rawData.forEach((e) => {
           if (e != null && e["popular"] == 1)
-            {
-              // print('each compi: ' + e.toString()),
-              this._homeData.add(Competition.fromMap(e))
-            }
+            {this._homeData.add(Competition.fromMap(e))}
         });
     notifyListeners();
   }
