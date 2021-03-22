@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
+import 'package:soccerstreams/screens/EventPage.dart';
+import 'package:soccerstreams/state/homeData.dart';
 
 // ignore: must_be_immutable
-class Event extends StatefulWidget {
+class Event extends ConsumerWidget {
   int id;
   int hScore;
   int vScore;
@@ -13,7 +16,6 @@ class Event extends StatefulWidget {
   String statusName;
   bool hasStreams;
   bool hasHighlights;
-  FocusNode focusNode = new FocusNode();
 
   Event.fromMap(Map data) {
     this.id = data['id'];
@@ -27,18 +29,9 @@ class Event extends StatefulWidget {
     this.hasStreams = data['hasStreams'];
     this.hasHighlights = data['hasHighlights'];
   }
-  @override
-  _Event createState() => _Event();
-}
 
-class _Event extends State<Event> {
-  bool _focused = false;
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ScopedReader watch) {
+    final dataController = watch(soccerDataProvider);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: displayWidth(context) * 0.8,
@@ -51,31 +44,31 @@ class _Event extends State<Event> {
               borderRadius: BorderRadius.circular(18.0),
             ))),
         autofocus: true,
-        // focusNode: widget.focusNode,
-        onPressed: () {},
+        onPressed: () {
+          dataController.loadEvent(id);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => (EventPage())));
+        },
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
             width: displayWidth(context) * 0.2,
             padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Text(
-              widget.hName,
+              hName,
               textAlign: TextAlign.right,
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
-              children: [
-                Text('${widget.hScore}  –  ${widget.vScore}'),
-                Text('${widget.minute}\'')
-              ],
+              children: [Text('${hScore}  –  ${vScore}'), Text('${minute}\'')],
             ),
           ),
           Container(
             width: displayWidth(context) * 0.2,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
-              widget.vName,
+              vName,
               textAlign: TextAlign.left,
             ),
           ),

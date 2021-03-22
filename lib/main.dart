@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/screens/Home.dart';
+import 'package:soccerstreams/screens/HomePage.dart';
 import 'package:flutter/services.dart';
 
 void main() {
