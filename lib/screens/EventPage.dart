@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/components/event.dart';
 import 'package:soccerstreams/components/eventDetail.dart';
-import 'package:soccerstreams/components/refreshbutton.dart';
+import 'package:soccerstreams/components/links.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
 import 'package:soccerstreams/state/homeData.dart';
 
@@ -10,9 +9,10 @@ class EventPage extends ConsumerWidget {
   // int id;
   EventPage();
   Widget build(BuildContext context, ScopedReader watch) {
-    final dataController = watch(soccerDataProvider);
+    // final dataController = watch(soccerDataProvider);
 
     EventDetail eventData = watch(soccerDataProvider).eventData;
+    List<Link> links = watch(soccerDataProvider).eventLinks;
     bool isLoading = watch(soccerDataProvider).isLoading;
     return Scaffold(
       body: isLoading
@@ -40,9 +40,18 @@ class EventPage extends ConsumerWidget {
                   Container(
                     height: displayHeight(context) * .9,
                     child: Center(
-                      child: Text('Sorry no streams right now'),
+                      child: Text('Sorry no event data'),
                     ),
-                  )
+                  ),
+                if (links != [])
+                  for (var l in links) l
+                else
+                  Container(
+                    height: displayHeight(context) * .9,
+                    child: Center(
+                      child: Text('Sorry no link right now'),
+                    ),
+                  ),
               ],
             ),
       // floatingActionButton: FloatingActionButton(

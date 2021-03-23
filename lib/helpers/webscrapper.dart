@@ -1,17 +1,27 @@
 import 'package:web_scraper/web_scraper.dart';
+import 'package:puppeteer/puppeteer.dart';
 
 class Scraper {
-  final webScraper = WebScraper('https://sportscentral.io/streams-table');
-  int id;
-  Scraper({this.id}) {
-    __init();
+  // final webScraper = WebScraper('https://sportscentral.io/streams-table');
+  Scraper() {
+    // __init();
   }
 
-  __init() async {
-    if (await webScraper.loadWebPage('/${id.toString()}/soccer')) {
-      List<Map<String, dynamic>> elements =
-          webScraper.getElement('div.watch-section > a', ['href']);
-      print(elements);
+  load(id) async {
+    try {
+      final webScraper = WebScraper('https://sportscentral.io');
+      if (await webScraper
+          .loadWebPage('/streams-table/${id.toString()}/soccer')) {
+        var elements =
+            webScraper.getElementAttribute('div.watch-section > a', 'href');
+        print(elements);
+        return elements;
+      }
+    } catch (e) {
+      print(e.toString());
+      return;
     }
   }
+
+  getIframe(url) async {}
 }

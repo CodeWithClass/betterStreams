@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
-import 'package:soccerstreams/screens/EventPage.dart';
-import 'package:soccerstreams/state/homeData.dart';
 
 // ignore: must_be_immutable
 class EventDetail extends ConsumerWidget {
@@ -39,7 +37,6 @@ class EventDetail extends ConsumerWidget {
   }
 
   Widget build(BuildContext context, ScopedReader watch) {
-    final dataController = watch(soccerDataProvider);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: displayWidth(context) * 0.6,
@@ -60,10 +57,7 @@ class EventDetail extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
-            children: [
-              Text('${hScore}  –  $vScore'),
-              Text('${startTimestamp}\'')
-            ],
+            children: [Text('$hScore  –  $vScore'), Text('$startTimestamp\'')],
           ),
         ),
         Container(

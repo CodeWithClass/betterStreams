@@ -7,13 +7,15 @@ import 'package:soccerstreams/helpers/webscrapper.dart';
 
 // final url = "https://sportscentral.io";
 final date = new DateFormat('yyyy-MM-dd');
-var dateString = date.format(DateTime.now());
 
 Future<ServerResponse> getAllMatches() async {
+  var dateString = date.format(DateTime.now());
+
   final Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
   };
+
   const endpoint = '/new-api/matches';
   final qParams = {
     'date': dateString,
@@ -34,6 +36,7 @@ Future<ServerResponse> getAllMatches() async {
 }
 
 Future<ServerResponse> getEvent(int id) async {
+  var dateString = date.format(DateTime.now());
   final Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
     'Accept': 'application/json',
@@ -57,6 +60,11 @@ Future<ServerResponse> getEvent(int id) async {
   }
 }
 
-Future<ServerResponse> getEentLinks(int id) async {
-  Scraper(id: id);
+Future<ServerResponse> getEventLinks(int id) async {
+  final scrape = new Scraper();
+  var elements = await scrape.load(id);
+
+  if (elements != [])
+    return ServerResponse(data: elements, msg: 'success', status: true);
+  return ServerResponse(data: elements, msg: 'failure', status: false);
 }

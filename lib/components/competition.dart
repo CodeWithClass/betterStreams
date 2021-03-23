@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:soccerstreams/components/event.dart';
+import 'package:soccerstreams/helpers/displaySize.dart';
 
+// ignore: must_be_immutable
 class Competition extends StatelessWidget {
   String name;
   String logo;
@@ -26,7 +28,8 @@ class Competition extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(80, 20, 80, 20),
+      margin: EdgeInsets.fromLTRB(
+          displayWidth(context) * 0.1, 20, displayWidth(context) * 0.1, 20),
       decoration: BoxDecoration(
         color: Colors.black38,
         borderRadius: BorderRadius.circular(25),

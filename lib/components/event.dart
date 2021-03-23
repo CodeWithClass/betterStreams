@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
+import 'package:soccerstreams/helpers/webscrapper.dart';
 import 'package:soccerstreams/screens/EventPage.dart';
+import 'package:soccerstreams/screens/testPage.dart';
 import 'package:soccerstreams/state/homeData.dart';
+import 'package:flutter/services.dart';
 
 // ignore: must_be_immutable
 class Event extends ConsumerWidget {
@@ -44,10 +47,23 @@ class Event extends ConsumerWidget {
               borderRadius: BorderRadius.circular(18.0),
             ))),
         autofocus: true,
-        onPressed: () {
-          dataController.loadEvent(id);
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => (EventPage())));
+        onPressed: () async {
+          // dataController.loadEvent(id);
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => (EventPage())));
+
+          var scrape = new Scraper();
+          // var src =
+          //     await scrape.getIframe("https://wigistream.to/embed/bp346kr7byj");
+
+          var src = "https://wigistream.to/embed/bp346kr7byj";
+
+          SystemChrome.setEnabledSystemUIOverlays([]);
+          SystemChrome.setPreferredOrientations([
+            DeviceOrientation.landscapeLeft,
+            DeviceOrientation.landscapeRight
+          ]).then((_) => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => (TestPage(src: src)))));
         },
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
@@ -61,7 +77,7 @@ class Event extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
-              children: [Text('${hScore}  –  ${vScore}'), Text('${minute}\'')],
+              children: [Text('$hScore  –  $vScore'), Text('$minute\'')],
             ),
           ),
           Container(

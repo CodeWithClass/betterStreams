@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/components/competition.dart';
 import 'package:soccerstreams/components/event.dart';
 import 'package:soccerstreams/services/getData.dart';
 
@@ -28,7 +27,7 @@ class MainDataNotifier extends ChangeNotifier {
     notifyListeners();
     var eventRes = await getEvent(id);
     if (eventRes.status) setEventData(eventRes.data);
-    await getEentLinks(id);
+    await getEventLinks(id);
     // if (linksRes.status) setEventData(linksRes.data);
 
     if (eventRes.status != null) _isLoading = false;

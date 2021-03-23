@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
               fontStyle: FontStyle.normal,
             ))),
         home: MyHomePage(title: 'SoccerStreams'),
+        // home: VideoApp()
       ),
     );
   }

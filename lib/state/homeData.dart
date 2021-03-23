@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soccerstreams/components/competition.dart';
-import 'package:soccerstreams/components/event.dart';
 import 'package:soccerstreams/components/eventDetail.dart';
+import 'package:soccerstreams/components/links.dart';
+import 'package:soccerstreams/helpers/serverResponse.dart';
 import 'package:soccerstreams/services/getData.dart';
 
 final soccerDataProvider = ChangeNotifierProvider((ref) => MainDataNotifier());
@@ -16,9 +17,11 @@ class MainDataNotifier extends ChangeNotifier {
   List rawData = [];
   List<Competition> _homeData = [];
   EventDetail _eventData;
+  List<Link> _eventLinks = [];
 
   List<Competition> get homeData => _homeData;
   EventDetail get eventData => _eventData;
+  List<Link> get eventLinks => _eventLinks;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -42,10 +45,11 @@ class MainDataNotifier extends ChangeNotifier {
   void loadEvent(int id) async {
     _isLoading = true;
     notifyListeners();
-    var eventRes = await getEvent(id);
+    ServerResponse eventRes = await getEvent(id);
     if (eventRes.status) setEventData(eventRes.data);
-    // await getEentLinks(id);
-    // if (linksRes.status) setEventData(linksRes.data);
+
+    ServerResponse eventLinkRes = await getEventLinks(id);
+    if (eventLinkRes.status) setEventLinksData(eventLinkRes.data);
     // print('============== res status========' + eventRes.status.toString());
     if (eventRes.status != null) _isLoading = false;
     notifyListeners();
@@ -61,9 +65,19 @@ class MainDataNotifier extends ChangeNotifier {
   }
 
   void setEventData(val) {
-    // rawData.add(jsonDecode(val));
-    // print(jsonDecode(val)["event"]);
     _eventData = EventDetail.fromMap(jsonDecode(val)["event"]);
+    notifyListeners();
+  }
+
+  void setEventLinksData(linksList) {
+    var i = 1;
+    for (var l in linksList) {
+      _eventLinks.add(Link(
+        id: i,
+        url: l,
+      ));
+      i++;
+    }
     notifyListeners();
   }
 }
