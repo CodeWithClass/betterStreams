@@ -50,7 +50,8 @@ class MainDataNotifier extends ChangeNotifier {
 
     ServerResponse eventLinkRes = await getEventLinks(id);
     if (eventLinkRes.status) setEventLinksData(eventLinkRes.data);
-    if (eventRes.status != null) _isLoading = false;
+    // if (eventRes.status != null) _isLoading = false;
+    _isLoading = false;
     notifyListeners();
   }
 
@@ -69,7 +70,7 @@ class MainDataNotifier extends ChangeNotifier {
   }
 
   void setEventLinksData(linksList) {
-    var i = 1;
+    var i = 0;
     for (var l in linksList) {
       _eventLinks.add(Link(
         id: i,
@@ -77,7 +78,7 @@ class MainDataNotifier extends ChangeNotifier {
       ));
       i++;
     }
-    _eventLinks.removeAt(0);
+    if (_eventLinks.length > 0) _eventLinks.removeAt(0);
     notifyListeners();
   }
 }

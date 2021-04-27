@@ -31,8 +31,8 @@ class EventPage extends ConsumerWidget {
                     children: [
                       TextButton(
                         onPressed: () {},
-                        // child: Text("BetterStreams",
-                        //     style: Theme.of(context).textTheme.headline5),
+                        child: Text("BetterStreams",
+                            style: Theme.of(context).textTheme.headline5),
                       ),
                     ],
                   ),
