@@ -1,5 +1,4 @@
 import 'package:web_scraper/web_scraper.dart';
-import 'package:puppeteer/puppeteer.dart';
 
 class Scraper {
   // final webScraper = WebScraper('https://sportscentral.io/streams-table');
@@ -14,7 +13,7 @@ class Scraper {
           .loadWebPage('/streams-table/${id.toString()}/soccer')) {
         var elements =
             webScraper.getElementAttribute('div.watch-section > a', 'href');
-        print(elements);
+        // print(elements);
         return elements;
       }
     } catch (e) {

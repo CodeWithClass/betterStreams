@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soccerstreams/components/refreshbutton.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
-import 'package:soccerstreams/state/homeData.dart';
+import 'package:soccerstreams/state/soccerData.dart';
 
 class MyHomePage extends ConsumerWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -28,8 +28,8 @@ class MyHomePage extends ConsumerWidget {
                   children: [
                     TextButton(
                       onPressed: () {},
-                      child: Text("BetterStreams",
-                          style: Theme.of(context).textTheme.headline5),
+                      // child: Text("BetterStreams",
+                      //     style: Theme.of(context).textTheme.headline5),
                     ),
                   ],
                 ),

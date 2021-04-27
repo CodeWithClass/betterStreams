@@ -19,7 +19,7 @@ Future<ServerResponse> getAllMatches() async {
   const endpoint = '/new-api/matches';
   final qParams = {
     'date': dateString,
-    'timeZone': '',
+    'timeZone': '240',
   };
 
   final Uri uri = Uri.https('sportscentral.io', '$endpoint', qParams);

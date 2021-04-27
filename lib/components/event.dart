@@ -4,8 +4,9 @@ import 'package:soccerstreams/helpers/displaySize.dart';
 import 'package:soccerstreams/helpers/webscrapper.dart';
 import 'package:soccerstreams/screens/EventPage.dart';
 import 'package:soccerstreams/screens/testPage.dart';
-import 'package:soccerstreams/state/homeData.dart';
+import 'package:soccerstreams/state/soccerData.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class Event extends ConsumerWidget {
@@ -19,6 +20,7 @@ class Event extends ConsumerWidget {
   String statusName;
   bool hasStreams;
   bool hasHighlights;
+  int startTimestamp;
 
   Event.fromMap(Map data) {
     this.id = data['id'];
@@ -31,10 +33,16 @@ class Event extends ConsumerWidget {
     this.statusName = data['statusDescription'];
     this.hasStreams = data['hasStreams'];
     this.hasHighlights = data['hasHighlights'];
+    this.startTimestamp = data['startTimestamp'];
   }
 
   Widget build(BuildContext context, ScopedReader watch) {
     final dataController = watch(soccerDataProvider);
+    final startDate =
+        new DateTime.fromMillisecondsSinceEpoch(this.startTimestamp * 1000);
+    final DateFormat timeFormatter = DateFormat('h:ss a');
+    final String startTime = timeFormatter.format(startDate);
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: displayWidth(context) * 0.8,
@@ -48,22 +56,9 @@ class Event extends ConsumerWidget {
             ))),
         autofocus: true,
         onPressed: () async {
-          // dataController.loadEvent(id);
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => (EventPage())));
-
-          var scrape = new Scraper();
-          // var src =
-          //     await scrape.getIframe("https://wigistream.to/embed/bp346kr7byj");
-
-          var src = "https://wigistream.to/embed/bp346kr7byj";
-
-          SystemChrome.setEnabledSystemUIOverlays([]);
-          SystemChrome.setPreferredOrientations([
-            DeviceOrientation.landscapeLeft,
-            DeviceOrientation.landscapeRight
-          ]).then((_) => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => (TestPage(src: src)))));
+          dataController.loadEvent(id);
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => (EventPage())));
         },
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
@@ -75,11 +70,20 @@ class Event extends ConsumerWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              children: [Text('$hScore  –  $vScore'), Text('$minute\'')],
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                children: [
+                  if (statusName == "NS")
+                    Text('$startTime')
+                  else if (statusName == "POSTP")
+                    Text('$status')
+                  else
+                    Column(children: [
+                      Text('$statusName'),
+                      Text('$hScore  –  $vScore')
+                    ])
+                ],
+              )),
           Container(
             width: displayWidth(context) * 0.2,
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

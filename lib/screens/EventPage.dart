@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soccerstreams/components/eventDetail.dart';
 import 'package:soccerstreams/components/links.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
-import 'package:soccerstreams/state/homeData.dart';
+import 'package:soccerstreams/state/soccerData.dart';
 
 class EventPage extends ConsumerWidget {
   // int id;
@@ -14,54 +14,57 @@ class EventPage extends ConsumerWidget {
     EventDetail eventData = watch(soccerDataProvider).eventData;
     List<Link> links = watch(soccerDataProvider).eventLinks;
     bool isLoading = watch(soccerDataProvider).isLoading;
-    return Scaffold(
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                  // semanticsLabel: 'Fetching matches',
-                  ),
-            )
-          : ListView(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              children: [
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: Text("BetterStreams",
-                          style: Theme.of(context).textTheme.headline5),
+    return WillPopScope(
+      onWillPop: () async => true,
+      child: Scaffold(
+        body: isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                    // semanticsLabel: 'Fetching matches',
                     ),
-                  ],
-                ),
-                if (eventData != null)
-                  eventData
-                else
-                  Container(
-                    height: displayHeight(context) * .9,
-                    child: Center(
-                      child: Text('Sorry no event data'),
-                    ),
+              )
+            : ListView(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                children: [
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        // child: Text("BetterStreams",
+                        //     style: Theme.of(context).textTheme.headline5),
+                      ),
+                    ],
                   ),
-                if (links != [])
-                  for (var l in links) l
-                else
-                  Container(
-                    height: displayHeight(context) * .9,
-                    child: Center(
-                      child: Text('Sorry no link right now'),
+                  if (eventData != null)
+                    eventData
+                  else
+                    Container(
+                      height: displayHeight(context) * .9,
+                      child: Center(
+                        child: Text('Sorry no event data'),
+                      ),
                     ),
-                  ),
-              ],
-            ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     soccerData.load();
-      //   },
-      //   child: Icon(
-      //     Icons.play_arrow,
-      //   ),
-      // ),
+                  if (links != [])
+                    for (var l in links) l
+                  else
+                    Container(
+                      height: displayHeight(context) * .9,
+                      child: Center(
+                        child: Text('Sorry no link right now'),
+                      ),
+                    ),
+                ],
+              ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () async {
+        //     soccerData.load();
+        //   },
+        //   child: Icon(
+        //     Icons.play_arrow,
+        //   ),
+        // ),
+      ),
     );
   }
 }

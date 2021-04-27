@@ -65,6 +65,7 @@ class MainDataNotifier extends ChangeNotifier {
   }
 
   void setEventData(val) {
+    print(jsonDecode(val));
     _eventData = EventDetail.fromMap(jsonDecode(val)["event"]);
     notifyListeners();
   }
