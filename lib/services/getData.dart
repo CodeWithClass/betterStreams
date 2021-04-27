@@ -1,9 +1,9 @@
 // import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:soccerstreams/helpers/serverResponse.dart';
+import 'package:betterstreams/helpers/serverResponse.dart';
 import 'package:intl/intl.dart';
-import 'package:soccerstreams/helpers/webscrapper.dart';
+import 'package:betterstreams/helpers/webscrapper.dart';
 
 // final url = "https://sportscentral.io";
 final date = new DateFormat('yyyy-MM-dd');

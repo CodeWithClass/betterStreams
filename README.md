@@ -1,4 +1,4 @@
-# soccerstreams
+# betterstreams
 
 A new Flutter project.
 

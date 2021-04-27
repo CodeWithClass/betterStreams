@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:soccerstreams/components/event.dart';
-import 'package:soccerstreams/helpers/displaySize.dart';
+import 'package:betterstreams/components/event.dart';
+import 'package:betterstreams/helpers/displaySize.dart';
 
 // ignore: must_be_immutable
 class Competition extends StatelessWidget {

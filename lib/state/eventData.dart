@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/components/event.dart';
-import 'package:soccerstreams/services/getData.dart';
+import 'package:betterstreams/components/event.dart';
+import 'package:betterstreams/services/getData.dart';
 
 final soccerEventDataProvider =
     ChangeNotifierProvider((ref) => MainDataNotifier());

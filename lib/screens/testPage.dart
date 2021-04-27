@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:soccerstreams/helpers/displaySize.dart';
+import 'package:betterstreams/helpers/displaySize.dart';
 import 'package:flutter/services.dart';
 
 class TestPage extends StatefulWidget {

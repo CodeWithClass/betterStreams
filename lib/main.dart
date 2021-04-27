@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/screens/HomePage.dart';
+import 'package:betterstreams/screens/HomePage.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         LogicalKeySet(LogicalKeyboardKey.select): ActivateIntent(),
       },
       child: MaterialApp(
-        title: 'Soccer Streams',
+        title: 'BetterStreamsNow',
         theme: ThemeData(
             brightness: Brightness.dark,
             // primarySwatch: Colors.pink,
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
               fontSize: 12.0,
               fontStyle: FontStyle.normal,
             ))),
-        home: MyHomePage(title: 'SoccerStreams'),
+        home: MyHomePage(title: 'betterstreams'),
         // home: VideoApp()
       ),
     );

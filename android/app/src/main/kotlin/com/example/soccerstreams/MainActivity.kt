@@ -1,4 +1,4 @@
-package com.coderehack.soccerstreams
+package com.coderehack.betterstreams
 
 import io.flutter.embedding.android.FlutterActivity
 

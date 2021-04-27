@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/components/competition.dart';
-import 'package:soccerstreams/components/eventDetail.dart';
-import 'package:soccerstreams/components/links.dart';
-import 'package:soccerstreams/helpers/serverResponse.dart';
-import 'package:soccerstreams/services/getData.dart';
+import 'package:betterstreams/components/competition.dart';
+import 'package:betterstreams/components/eventDetail.dart';
+import 'package:betterstreams/components/links.dart';
+import 'package:betterstreams/helpers/serverResponse.dart';
+import 'package:betterstreams/services/getData.dart';
 
 final soccerDataProvider = ChangeNotifierProvider((ref) => MainDataNotifier());
 

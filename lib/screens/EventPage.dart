@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/components/eventDetail.dart';
-import 'package:soccerstreams/components/links.dart';
-import 'package:soccerstreams/helpers/displaySize.dart';
-import 'package:soccerstreams/state/soccerData.dart';
+import 'package:betterstreams/components/eventDetail.dart';
+import 'package:betterstreams/components/links.dart';
+import 'package:betterstreams/helpers/displaySize.dart';
+import 'package:betterstreams/state/soccerData.dart';
 
 class EventPage extends ConsumerWidget {
   // int id;

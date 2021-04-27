@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:soccerstreams/helpers/displaySize.dart';
-import 'package:soccerstreams/helpers/webscrapper.dart';
-import 'package:soccerstreams/screens/EventPage.dart';
-import 'package:soccerstreams/screens/testPage.dart';
-import 'package:soccerstreams/state/soccerData.dart';
+import 'package:betterstreams/helpers/displaySize.dart';
+import 'package:betterstreams/helpers/webscrapper.dart';
+import 'package:betterstreams/screens/EventPage.dart';
+import 'package:betterstreams/screens/testPage.dart';
+import 'package:betterstreams/state/soccerData.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
