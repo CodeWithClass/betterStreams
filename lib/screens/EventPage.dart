@@ -46,7 +46,10 @@ class EventPage extends ConsumerWidget {
                       ),
                     ),
                   if (links != [])
-                    for (var l in links) l
+                    for (var l in links)
+                      Container(
+                          margin: EdgeInsets.symmetric(horizontal: 40),
+                          child: l)
                   else
                     Container(
                       height: displayHeight(context) * .9,

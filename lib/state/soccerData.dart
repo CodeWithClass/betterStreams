@@ -50,7 +50,6 @@ class MainDataNotifier extends ChangeNotifier {
 
     ServerResponse eventLinkRes = await getEventLinks(id);
     if (eventLinkRes.status) setEventLinksData(eventLinkRes.data);
-    // print('============== res status========' + eventRes.status.toString());
     if (eventRes.status != null) _isLoading = false;
     notifyListeners();
   }
@@ -65,7 +64,6 @@ class MainDataNotifier extends ChangeNotifier {
   }
 
   void setEventData(val) {
-    print(jsonDecode(val));
     _eventData = EventDetail.fromMap(jsonDecode(val)["event"]);
     notifyListeners();
   }
@@ -79,6 +77,7 @@ class MainDataNotifier extends ChangeNotifier {
       ));
       i++;
     }
+    _eventLinks.removeAt(0);
     notifyListeners();
   }
 }

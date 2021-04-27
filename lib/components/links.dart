@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:soccerstreams/helpers/displaySize.dart';
 import 'package:soccerstreams/helpers/webscrapper.dart';
 import 'package:soccerstreams/screens/testPage.dart';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 // ignore: must_be_immutable
 class Link extends ConsumerWidget {
@@ -14,8 +16,7 @@ class Link extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     // final dataController = watch(soccerDataProvider);
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: 266,
+      margin: EdgeInsets.all(10),
       child: ElevatedButton(
         style: ButtonStyle(
             backgroundColor:
@@ -25,7 +26,9 @@ class Link extends ConsumerWidget {
               borderRadius: BorderRadius.circular(18.0),
             ))),
         autofocus: true,
-        onPressed: () {},
+        onPressed: () {
+          html.window.open(url, 'new tab');
+        },
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
             width: displayWidth(context) * 0.2,

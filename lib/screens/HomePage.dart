@@ -45,14 +45,6 @@ class MyHomePage extends ConsumerWidget {
                   )
               ],
             ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () async {
-      //     soccerData.load();
-      //   },
-      //   child: Icon(
-      //     Icons.play_arrow,
-      //   ),
-      // ),
     );
   }
 }
