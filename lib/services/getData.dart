@@ -8,7 +8,7 @@ import 'package:betterstreams/helpers/webscrapper.dart';
 // final url = "https://sportscentral.io";
 final date = new DateFormat('yyyy-MM-dd');
 
-Future<ServerResponse> getAllMatches() async {
+Future<ServerResponse> getAllMatches(day) async {
   var dateString = date.format(DateTime.now());
 
   final Map<String, String> requestHeaders = {

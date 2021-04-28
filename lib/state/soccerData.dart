@@ -28,15 +28,15 @@ class MainDataNotifier extends ChangeNotifier {
 
   void _init() async {
     _isLoading = true;
-    var res = await getAllMatches();
+    var res = await getAllMatches(0);
     if (res.status) setHomeData(res.data);
     if (res.status != null) _isLoading = false;
   }
 
-  void load() async {
+  void load({day = 0}) async {
     _isLoading = true;
     notifyListeners();
-    var res = await getAllMatches();
+    var res = await getAllMatches(day);
     if (res.status) setHomeData(res.data);
     if (res.status != null) _isLoading = false;
     notifyListeners();

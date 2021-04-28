@@ -41,7 +41,16 @@ class Competition extends StatelessWidget {
           children: [
             Row(
               children: [
-                Container(width: 50, child: Image(image: NetworkImage(logo))),
+                Container(
+                  width: 50,
+                  margin: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey[100],
+                  ),
+                  child: Image(image: NetworkImage(logo)),
+                ),
                 Text(name),
               ],
             ),

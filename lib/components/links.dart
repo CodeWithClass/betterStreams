@@ -41,12 +41,15 @@ class Link extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
           ),
-          Container(
-            width: displayWidth(context) * 0.6,
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              url,
-              textAlign: TextAlign.left,
+          Flexible(
+            child: Container(
+              width: displayWidth(context) * 0.6,
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                url,
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
         ]),
