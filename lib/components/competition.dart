@@ -28,7 +28,8 @@ class Competition extends StatelessWidget {
 
   Widget build(BuildContext context) {
     double mx = displayWidth(context) * .15;
-    if (displayWidth(context) < 800) mx = 10;
+    if (displayWidth(context) < 800) mx = 20;
+    if (displayWidth(context) > 1200) mx = mx * 1.5;
 
     return Container(
       margin: EdgeInsets.fromLTRB(mx, 20, mx, 20),

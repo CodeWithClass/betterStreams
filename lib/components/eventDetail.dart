@@ -44,7 +44,8 @@ class EventDetail extends ConsumerWidget {
         new DateTime.fromMillisecondsSinceEpoch(this.startTimestamp * 1000);
     final DateFormat timeFormatter = DateFormat('h:ss a');
     final String startTime = timeFormatter.format(startDate);
-
+    print(vLogo);
+    print(hLogo);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: displayWidth(context) * 0.6,

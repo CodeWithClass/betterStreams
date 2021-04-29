@@ -13,7 +13,7 @@ Widget refreshButton({Function onpressed}) {
           onPressed: () => {onpressed()},
           style: ButtonStyle(
               backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.transparent),
+                  MaterialStateProperty.all<Color>(Colors.pink[700]),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0),
