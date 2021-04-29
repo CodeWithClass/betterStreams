@@ -16,9 +16,6 @@ class EventPage extends ConsumerWidget {
     EventDetail eventData = watch(soccerDataProvider).eventData;
     List<Link> links = watch(soccerDataProvider).eventLinks;
     bool isLoading = watch(soccerDataProvider).isLoading;
-    // print(links);
-    // print(eventData.toString());
-    // print(eventData.statusName);
 
     return WillPopScope(
       onWillPop: () async => true,
@@ -26,7 +23,7 @@ class EventPage extends ConsumerWidget {
         body: isLoading
             ? Center(
                 child: CircularProgressIndicator(
-                    // semanticsLabel: 'Fetching matches',
+                    // semanticsLabel: 'Fetching links',
                     ),
               )
             : ListView(

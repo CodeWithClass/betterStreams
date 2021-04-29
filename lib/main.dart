@@ -19,13 +19,14 @@ class MyApp extends StatelessWidget {
         title: 'BetterStreamsNow',
         theme: ThemeData(
             brightness: Brightness.dark,
-            // primarySwatch: Colors.pink,
+            primarySwatch: Colors.pink,
+            accentColor: Colors.pink[700],
             textTheme: TextTheme(
                 headline1: TextStyle(
               fontSize: 12.0,
               fontStyle: FontStyle.normal,
             ))),
-        home: MyHomePage(title: 'betterstreams'),
+        home: MyHomePage(title: 'betterstreamsnow'),
         // home: VideoApp()
       ),
     );

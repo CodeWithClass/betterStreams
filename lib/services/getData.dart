@@ -10,7 +10,8 @@ import 'package:html/parser.dart' show parse;
 final date = new DateFormat('yyyy-MM-dd');
 
 Future<ServerResponse> getAllMatches(day) async {
-  var dateString = date.format(DateTime.now());
+  final now = DateTime.now();
+  var dateString = date.format(DateTime(now.year, now.month, now.day + day));
 
   final Map<String, String> requestHeaders = {
     'Content-type': 'application/json',

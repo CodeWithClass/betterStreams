@@ -25,18 +25,18 @@ class MainDataNotifier extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+  int _day;
+  int get day => _day;
 
   void _init() async {
-    _isLoading = true;
-    var res = await getAllMatches(0);
-    if (res.status) setHomeData(res.data);
-    if (res.status != null) _isLoading = false;
+    _day = 0;
+    load();
   }
 
-  void load({day = 0}) async {
+  void load() async {
     _isLoading = true;
     notifyListeners();
-    var res = await getAllMatches(day);
+    var res = await getAllMatches(this._day);
     if (res.status) setHomeData(res.data);
     if (res.status != null) _isLoading = false;
     notifyListeners();
@@ -50,18 +50,18 @@ class MainDataNotifier extends ChangeNotifier {
 
     ServerResponse eventLinkRes = await getEventLinks(id);
     if (eventLinkRes.status) setEventLinksData(eventLinkRes.data);
-    // if (eventRes.status != null) _isLoading = false;
     _isLoading = false;
     notifyListeners();
   }
 
   void setHomeData(val) {
+    this._homeData = [];
+    this.rawData = [];
     rawData.addAll(jsonDecode(val));
     rawData.forEach((e) => {
           if (e != null && e["popular"] == 1)
             {this._homeData.add(Competition.fromMap(e))}
         });
-    notifyListeners();
   }
 
   void setEventData(val) {
@@ -108,5 +108,10 @@ class MainDataNotifier extends ChangeNotifier {
     }
     if (_eventLinks.length > 0) _eventLinks.removeAt(0);
     notifyListeners();
+  }
+
+  void changeDay(day) {
+    this._day = day;
+    load();
   }
 }
