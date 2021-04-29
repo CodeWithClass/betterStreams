@@ -1,4 +1,5 @@
 import 'package:betterstreams/components/backbutton.dart';
+import 'package:betterstreams/components/mainLogo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/components/eventDetail.dart';
@@ -34,11 +35,7 @@ class EventPage extends ConsumerWidget {
                 children: [
                   Row(
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: Text("BetterStreams",
-                            style: Theme.of(context).textTheme.headline5),
-                      ),
+                      TextButton(onPressed: () {}, child: mainLogo()),
                     ],
                   ),
                   backbutton(context: context),

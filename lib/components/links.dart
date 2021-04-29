@@ -88,14 +88,13 @@ class Link extends ConsumerWidget {
                           color: Colors.green[600],
                         ),
                       ),
-                      Flexible(
-                        child: Container(
-                          child: Text(
-                            '$channel  ',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(color: Colors.yellow[600]),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                      Container(
+                        width: 120,
+                        child: Text(
+                          '$channel  ',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(color: Colors.yellow[600]),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
