@@ -27,11 +27,13 @@ class Competition extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
+    double mx = displayWidth(context) * .15;
+    if (displayWidth(context) < 800) mx = 10;
+
     return Container(
-      margin: EdgeInsets.fromLTRB(
-          displayWidth(context) * 0.1, 20, displayWidth(context) * 0.1, 20),
+      margin: EdgeInsets.fromLTRB(mx, 20, mx, 20),
       decoration: BoxDecoration(
-        color: Colors.black38,
+        color: Colors.grey[800],
         borderRadius: BorderRadius.circular(25),
       ),
       child: Padding(

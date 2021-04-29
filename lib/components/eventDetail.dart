@@ -48,54 +48,90 @@ class EventDetail extends ConsumerWidget {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: displayWidth(context) * 0.6,
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Container(
-          width: displayWidth(context) * 0.2,
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: Column(
-            children: [
-              Container(
-                  width: displayWidth(context) * 0.1,
-                  margin: EdgeInsets.all(10),
-                  child: Image.network(hLogo)),
-              Text(hName, textAlign: TextAlign.center),
-            ],
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              children: [
-                if (statusName == "NS")
-                  Column(
-                    children: [
-                      Text('Match starts at'),
-                      Text('$startTime'),
-                    ],
-                  )
-                else if (statusName == "POSTP")
-                  Text('$status')
-                else
-                  Column(children: [
-                    Text('$statusName'),
-                    Text('$hScore  –  $vScore')
-                  ])
-              ],
-            )),
-        Container(
-          width: displayWidth(context) * 0.2,
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: Column(
-            children: [
-              Container(
-                  width: displayWidth(context) * 0.1,
-                  margin: EdgeInsets.all(10),
-                  child: Image.network(vLogo)),
-              Text(vName, textAlign: TextAlign.center),
-            ],
-          ),
-        ),
-      ]),
+      child: Column(
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+              width: displayWidth(context) * 0.2,
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Column(
+                children: [
+                  Container(
+                      width: displayWidth(context) * 0.1,
+                      margin: EdgeInsets.all(10),
+                      child: Image.network(hLogo)),
+                  Text(hName, textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  children: [
+                    if (statusName == "NS")
+                      Column(
+                        children: [
+                          Text('Match starts at'),
+                          Text('$startTime'),
+                        ],
+                      )
+                    else if (statusName == "POSTP")
+                      Text('$status')
+                    else
+                      Column(children: [
+                        statusName == 'FT'
+                            ? Text(
+                                '$statusName',
+                                style: TextStyle(color: Colors.red[800]),
+                              )
+                            : Text(
+                                '$statusName\'',
+                                style: TextStyle(color: Colors.yellow[800]),
+                              ),
+                        Text(
+                          '$hScore  –  $vScore',
+                          style: TextStyle(
+                              fontSize: 26, fontWeight: FontWeight.bold),
+                        )
+                      ])
+                  ],
+                )),
+            Container(
+              width: displayWidth(context) * 0.2,
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Column(
+                children: [
+                  Container(
+                      width: displayWidth(context) * 0.1,
+                      margin: EdgeInsets.all(10),
+                      child: Image.network(vLogo)),
+                  Text(vName, textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+          ]),
+          if (statusName == 'NS')
+            Container(
+              height: displayHeight(context) * .5,
+              child: Center(
+                child: Text(
+                  'Links are posted ~30 mins before match start.',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            )
+          else if (statusName == 'FT')
+            Container(
+              height: displayHeight(context) * .5,
+              child: Center(
+                child: Text(
+                  'Match has ended. View highlights on Youtube or something',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            )
+        ],
+      ),
     );
   }
 }

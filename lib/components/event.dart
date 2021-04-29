@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/helpers/displaySize.dart';
-import 'package:betterstreams/helpers/webscrapper.dart';
 import 'package:betterstreams/screens/EventPage.dart';
-import 'package:betterstreams/screens/testPage.dart';
 import 'package:betterstreams/state/soccerData.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
@@ -48,13 +45,13 @@ class Event extends ConsumerWidget {
       width: displayWidth(context) * 0.8,
       child: ElevatedButton(
         style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.transparent),
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.grey[900]),
+            // backgroundColor: Colors.grey[600],
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(18.0),
             ))),
-        autofocus: true,
+        // autofocus: true,
         onPressed: () async {
           dataController.loadEvent(id);
           Navigator.push(
@@ -79,8 +76,20 @@ class Event extends ConsumerWidget {
                     Text('$status')
                   else
                     Column(children: [
-                      Text('$statusName'),
-                      Text('$hScore  –  $vScore')
+                      statusName == 'FT'
+                          ? Text(
+                              '$statusName',
+                              style: TextStyle(color: Colors.red[800]),
+                            )
+                          : Text(
+                              '$statusName\'',
+                              style: TextStyle(color: Colors.yellow[800]),
+                            ),
+                      Text(
+                        '$hScore  –  $vScore',
+                        style:
+                            TextStyle(color: Colors.yellow[600], fontSize: 16),
+                      )
                     ])
                 ],
               )),

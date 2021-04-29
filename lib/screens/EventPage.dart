@@ -1,3 +1,4 @@
+import 'package:betterstreams/components/backbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/components/eventDetail.dart';
@@ -14,6 +15,10 @@ class EventPage extends ConsumerWidget {
     EventDetail eventData = watch(soccerDataProvider).eventData;
     List<Link> links = watch(soccerDataProvider).eventLinks;
     bool isLoading = watch(soccerDataProvider).isLoading;
+    // print(links);
+    // print(eventData.toString());
+    // print(eventData.statusName);
+
     return WillPopScope(
       onWillPop: () async => true,
       child: Scaffold(
@@ -36,6 +41,7 @@ class EventPage extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  backbutton(context: context),
                   if (eventData != null)
                     eventData
                   else
@@ -45,28 +51,10 @@ class EventPage extends ConsumerWidget {
                         child: Text('Sorry no event data'),
                       ),
                     ),
-                  if (links != [])
-                    for (var l in links)
-                      Container(
-                          margin: EdgeInsets.symmetric(horizontal: 40),
-                          child: l)
-                  else
-                    Container(
-                      height: displayHeight(context) * .9,
-                      child: Center(
-                        child: Text('Sorry no link right now'),
-                      ),
-                    ),
+                  if (links.length > 0)
+                    for (var l in links) l
                 ],
               ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () async {
-        //     soccerData.load();
-        //   },
-        //   child: Icon(
-        //     Icons.play_arrow,
-        //   ),
-        // ),
       ),
     );
   }

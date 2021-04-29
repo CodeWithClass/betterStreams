@@ -69,7 +69,35 @@ class MainDataNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setEventLinksData(linksList) {
+  void setEventLinksData(data) {
+    final links = data['links'];
+    final names = data['names'];
+    final langs = data['langs'];
+    final quals = data['quals'];
+    final bits = data['bits'];
+    final chan = data['chan'];
+
+    if (links.length < 1) return;
+
+    for (var i = 0; i < links.length; i++) {
+      _eventLinks.add(Link(
+        id: i,
+        url: links[i],
+        name: i < names.length ? names[i] : '',
+        quality: i < quals.length ? quals[i] : 'SD',
+        language: i < langs.length ? langs[i] : '',
+        bitrate: i < bits.length ? bits[i] : '',
+        channel: i < chan.length ? chan[i] : '',
+      ));
+    }
+
+    if (_eventLinks.length > 0) _eventLinks.removeAt(0);
+    notifyListeners();
+  }
+
+//Scraping
+  // ignore: non_constant_identifier_names
+  void setEventLinksData_(linksList) {
     var i = 0;
     for (var l in linksList) {
       _eventLinks.add(Link(
