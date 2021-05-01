@@ -17,9 +17,11 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final buttons = [
+      {'text': 'Day Before', 'val': -2},
       {'text': 'Yesterday', 'val': -1},
       {'text': 'Today', 'val': 0},
-      {'text': 'Tomorrow', 'val': 1}
+      {'text': 'Tomorrow', 'val': 1},
+      {'text': 'Day After', 'val': 2}
     ];
     final soccerData = watch(soccerDataProvider);
     final isLoading = watch(soccerDataProvider).isLoading;
@@ -45,18 +47,25 @@ class MyHomePage extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (var i = 0; i < 3; i++)
-                      dayButton(
-                        onPressed: () => context
-                            .read(soccerDataProvider)
-                            .changeDay(buttons[i]['val']),
-                        text: buttons[i]['text'],
-                        selected: buttons[i]['val'] == day,
-                      ),
-                  ],
+                Container(
+                  width: displayWidth(context),
+                  height: 60,
+                  child: Center(
+                    child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (var i = 0; i < buttons.length; i++)
+                              dayButton(
+                                onPressed: () => context
+                                    .read(soccerDataProvider)
+                                    .changeDay(buttons[i]['val']),
+                                text: buttons[i]['text'],
+                                selected: buttons[i]['val'] == day,
+                              ),
+                          ],
+                        )),
+                  ),
                 ),
                 if (soccerData.homeData != [])
                   for (var i in soccerData.homeData) i

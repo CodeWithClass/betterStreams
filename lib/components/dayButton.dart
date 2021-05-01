@@ -5,7 +5,7 @@ Widget dayButton({Function onPressed, String text, bool selected}) {
     return Container(
       margin: EdgeInsets.all(10),
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: () => {},
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(text),
