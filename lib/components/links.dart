@@ -41,7 +41,7 @@ class Link extends ConsumerWidget {
             ))),
         // autofocus: true,
         onPressed: () {
-          html.window.open(url, 'new tab');
+          html.window.open(url, '');
         },
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Flexible(

@@ -1,4 +1,5 @@
 import 'package:betterstreams/components/links.dart';
+import 'package:betterstreams/components/youtubeButton.dart';
 import 'package:betterstreams/state/soccerData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,7 +37,7 @@ class EventDetail extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final String startTime = startTimeFormater(this.startTimestamp);
     List<Link> links = watch(soccerDataProvider).eventLinks;
-
+    final searchQ = '$hName+$vName';
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: displayWidth(context) * 0.6,
@@ -104,7 +105,7 @@ class EventDetail extends ConsumerWidget {
           ]),
           if (statusName == 'NS' && links.length < 1)
             Container(
-              height: displayHeight(context) * .5,
+              height: displayHeight(context) * .3,
               child: Center(
                 child: Text(
                   'Links are posted ~30 mins before match start.',
@@ -114,17 +115,29 @@ class EventDetail extends ConsumerWidget {
             )
           else if (statusName == 'FT')
             Container(
-              height: displayHeight(context) * .5,
+              height: 200,
               child: Center(
-                child: Text(
-                  'Match has ended. View highlights on Youtube or something',
-                  style: TextStyle(fontSize: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Match has ended. View highlights on ',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      runSpacing: 5,
+                      children: [hlfButton(searchQ), shButton(searchQ)],
+                    )
+                  ],
                 ),
               ),
             )
           else if (links.length < 1)
             Container(
-              height: displayHeight(context) * .5,
+              height: displayHeight(context) * .3,
               child: Center(
                 child: Text(
                   'This match doesn\'t seem to have any links.',
