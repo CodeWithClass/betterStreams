@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/helpers/displaySize.dart';
 import 'package:betterstreams/screens/EventPage.dart';
 import 'package:betterstreams/state/soccerData.dart';
-import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class Event extends ConsumerWidget {
