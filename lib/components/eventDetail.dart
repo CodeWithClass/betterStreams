@@ -1,3 +1,5 @@
+import 'package:betterstreams/components/links.dart';
+import 'package:betterstreams/state/soccerData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/helpers/displaySize.dart';
@@ -16,10 +18,6 @@ class EventDetail extends ConsumerWidget {
   String status;
   var statusName;
 
-  // String statusName;
-  // bool hasStreams;
-  // bool hasHighlights;
-
   EventDetail.fromMap(Map data) {
     this.id = data['id'];
     this.hScore = data['homeScore']["current"];
@@ -33,10 +31,6 @@ class EventDetail extends ConsumerWidget {
     this.statusName = data['statusDescription'];
     this.startTimestamp = data['startTimestamp'];
     this.status = data['status']["type"];
-
-    // this.statusName = data['statusDescription'];
-    // this.hasStreams = data['hasStreams'];
-    // this.hasHighlights = data['hasHighlights'];
   }
 
   Widget build(BuildContext context, ScopedReader watch) {
@@ -44,6 +38,7 @@ class EventDetail extends ConsumerWidget {
         new DateTime.fromMillisecondsSinceEpoch(this.startTimestamp * 1000);
     final DateFormat timeFormatter = DateFormat('h:ss a');
     final String startTime = timeFormatter.format(startDate);
+    List<Link> links = watch(soccerDataProvider).eventLinks;
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -110,7 +105,7 @@ class EventDetail extends ConsumerWidget {
               ),
             ),
           ]),
-          if (statusName == 'NS')
+          if (statusName == 'NS' && links.length < 1)
             Container(
               height: displayHeight(context) * .5,
               child: Center(
@@ -126,6 +121,16 @@ class EventDetail extends ConsumerWidget {
               child: Center(
                 child: Text(
                   'Match has ended. View highlights on Youtube or something',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ),
+            )
+          else if (links.length < 1)
+            Container(
+              height: displayHeight(context) * .5,
+              child: Center(
+                child: Text(
+                  'This match doesn\'t seem to have any links.',
                   style: TextStyle(fontSize: 16),
                 ),
               ),
