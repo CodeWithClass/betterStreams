@@ -1,3 +1,4 @@
+import 'package:betterstreams/helpers/time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/helpers/displaySize.dart';
@@ -35,10 +36,7 @@ class Event extends ConsumerWidget {
 
   Widget build(BuildContext context, ScopedReader watch) {
     final dataController = watch(soccerDataProvider);
-    final startDate =
-        new DateTime.fromMillisecondsSinceEpoch(this.startTimestamp * 1000);
-    final DateFormat timeFormatter = DateFormat('h:ss a');
-    final String startTime = timeFormatter.format(startDate);
+    final String startTime = startTimeFormater(this.startTimestamp);
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),

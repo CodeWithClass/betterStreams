@@ -3,7 +3,7 @@ import 'package:betterstreams/state/soccerData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/helpers/displaySize.dart';
-import 'package:intl/intl.dart';
+import 'package:betterstreams/helpers/time.dart';
 
 // ignore: must_be_immutable
 class EventDetail extends ConsumerWidget {
@@ -34,10 +34,7 @@ class EventDetail extends ConsumerWidget {
   }
 
   Widget build(BuildContext context, ScopedReader watch) {
-    final startDate =
-        new DateTime.fromMillisecondsSinceEpoch(this.startTimestamp * 1000);
-    final DateFormat timeFormatter = DateFormat('h:ss a');
-    final String startTime = timeFormatter.format(startDate);
+    final String startTime = startTimeFormater(this.startTimestamp);
     List<Link> links = watch(soccerDataProvider).eventLinks;
 
     return Container(
