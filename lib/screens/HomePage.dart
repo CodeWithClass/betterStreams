@@ -16,7 +16,7 @@ class MyHomePage extends ConsumerWidget {
 
   calcOffset(context, buttons) {
     final numBtns = buttons.length;
-    final btnsWidth = 120 * numBtns;
+    final btnsWidth = 130 * numBtns;
     if (displayWidth(context) > btnsWidth) {
       return 0;
     }
