@@ -14,6 +14,15 @@ class MyHomePage extends ConsumerWidget {
     context.read(soccerDataProvider).changeDay(val);
   }
 
+  calcOffset(context, buttons) {
+    final numBtns = buttons.length;
+    final btnsWidth = 120 * numBtns;
+    if (displayWidth(context) > btnsWidth) {
+      return 0;
+    }
+    return (btnsWidth - displayWidth(context)) / 2;
+  }
+
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final buttons = [
@@ -26,7 +35,8 @@ class MyHomePage extends ConsumerWidget {
     final soccerData = watch(soccerDataProvider);
     final isLoading = watch(soccerDataProvider).isLoading;
     final day = watch(soccerDataProvider).day;
-    final sc = ScrollController(initialScrollOffset: 120);
+    final sc =
+        ScrollController(initialScrollOffset: calcOffset(context, buttons));
     return Scaffold(
       body: isLoading
           ? Center(
