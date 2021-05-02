@@ -26,6 +26,7 @@ class MyHomePage extends ConsumerWidget {
     final soccerData = watch(soccerDataProvider);
     final isLoading = watch(soccerDataProvider).isLoading;
     final day = watch(soccerDataProvider).day;
+    final sc = ScrollController(initialScrollOffset: 120);
     return Scaffold(
       body: isLoading
           ? Center(
@@ -52,6 +53,7 @@ class MyHomePage extends ConsumerWidget {
                   height: 60,
                   child: Center(
                     child: SingleChildScrollView(
+                        controller: sc,
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [

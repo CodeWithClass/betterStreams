@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 Widget dayButton({Function onPressed, String text, bool selected}) {
   if (selected)
     return Container(
+      width: 100,
       margin: EdgeInsets.all(10),
       child: ElevatedButton(
         onPressed: () => {},
@@ -20,6 +21,7 @@ Widget dayButton({Function onPressed, String text, bool selected}) {
     );
   return Container(
     margin: EdgeInsets.all(10),
+    width: 100,
     child: OutlinedButton(
       onPressed: onPressed,
       child: Padding(
