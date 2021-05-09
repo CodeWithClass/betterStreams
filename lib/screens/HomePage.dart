@@ -55,9 +55,17 @@ class MyHomePage extends ConsumerWidget {
                               return Column(
                                 children: [
                                   Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       TextButton(
                                           onPressed: () {}, child: mainLogo()),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text('v1.4.0'),
+                                      )
                                     ],
                                   ),
                                   refreshButton(onpressed: soccerData.load),
