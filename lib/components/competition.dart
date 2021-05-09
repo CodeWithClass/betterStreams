@@ -46,6 +46,7 @@ class Competition extends StatelessWidget {
               children: [
                 Container(
                   width: 50,
+                  height: 50,
                   margin: EdgeInsets.all(15),
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(

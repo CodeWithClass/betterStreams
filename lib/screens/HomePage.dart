@@ -37,10 +37,7 @@ class MyHomePage extends ConsumerWidget {
     return Scaffold(
         body: isLoading
             ? Center(
-                child: CircularProgressIndicator(
-                    // semanticsLabel: 'Fetching matches',
-
-                    ),
+                child: CircularProgressIndicator(),
               )
             : Column(
                 children: [
