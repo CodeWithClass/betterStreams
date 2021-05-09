@@ -1,7 +1,7 @@
 name: betterstreams
 description: A better football streamer.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
-version: 1.4.0
+version: 1.4.4
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

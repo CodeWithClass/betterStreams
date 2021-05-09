@@ -1,7 +1,7 @@
+import 'package:betterstreams/services/getData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/helpers/displaySize.dart';
-// import 'package:betterstreams/helpers/webscrapper.dart';
 import 'package:universal_html/html.dart' as html;
 
 // ignore: must_be_immutable
@@ -40,8 +40,10 @@ class Link extends ConsumerWidget {
               borderRadius: BorderRadius.circular(18.0),
             ))),
         // autofocus: true,
-        onPressed: () {
-          html.window.open(url, '');
+        onPressed: () async {
+          var res = await scrapeLink(url);
+          // html.window.open(url, '');
+          html.window.open(res.data, '');
         },
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Flexible(

@@ -61,7 +61,7 @@ class MyHomePage extends ConsumerWidget {
                                           onPressed: () {}, child: mainLogo()),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text('v1.4.0'),
+                                        child: Text('v1.4.4'),
                                       )
                                     ],
                                   ),

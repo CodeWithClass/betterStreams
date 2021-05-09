@@ -1,12 +1,12 @@
 // import 'dart:convert';
 
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:betterstreams/helpers/serverResponse.dart';
 import 'package:intl/intl.dart';
-import 'package:betterstreams/helpers/webscrapper.dart';
 import 'package:html/parser.dart' show parse;
 
-// final url = "https://sportscentral.io";
 final date = new DateFormat('yyyy-MM-dd');
 
 Future<ServerResponse> getAllMatches(day) async {
@@ -125,11 +125,23 @@ Future<ServerResponse> getEventLinks(int id) async {
 
 //scraping
 // ignore: non_constant_identifier_names
-Future<ServerResponse> getEventLinks_(int id) async {
-  final scrape = new Scraper();
-  var elements = await scrape.load(id);
+Future<ServerResponse> scrapeLink(String url) async {
+  // final test_url = 'https://tinyurl.is/JRwu?sport=soccer';
+  final prod = 'https://us-central1-coderehack-dotcom.cloudfunctions.net';
+  // ignore: unused_local_variable
+  final dev = 'http://localhost:5001/coderehack-dotcom/us-central1';
 
-  if (elements != [])
-    return ServerResponse(data: elements, msg: 'success', status: true);
-  return ServerResponse(data: elements, msg: 'failure', status: false);
+  try {
+    final response = await http.Client().get(Uri.parse('$prod/test?url=$url'));
+    if (response.statusCode == 200) {
+      final document = parse(response.body);
+      final actualLink = document.getElementById('skip-btn').attributes['href'];
+      return ServerResponse(data: actualLink, msg: "Success", status: true);
+    }
+    //just return the original url if scrape failed
+    return ServerResponse(
+        data: url, msg: "Failed to scrape link", status: false);
+  } catch (e) {
+    return ServerResponse(data: e, msg: "error", status: false);
+  }
 }
