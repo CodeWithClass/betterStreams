@@ -77,7 +77,10 @@ class MainDataNotifier extends ChangeNotifier {
     final bits = data['bits'];
     final chan = data['chan'];
 
-    if (links.length < 1) return;
+    if (links.length < 1) {
+      _eventLinks = [];
+      return;
+    }
 
     for (var i = 0; i < links.length; i++) {
       _eventLinks.add(Link(

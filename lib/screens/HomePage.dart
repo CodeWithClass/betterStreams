@@ -10,9 +10,6 @@ class MyHomePage extends ConsumerWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
-  dayBtnAction(context, val) {
-    context.read(soccerDataProvider).changeDay(val);
-  }
 
   calcOffset(context, buttons) {
     final numBtns = buttons.length;
@@ -38,58 +35,76 @@ class MyHomePage extends ConsumerWidget {
     final sc =
         ScrollController(initialScrollOffset: calcOffset(context, buttons));
     return Scaffold(
-      body: isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                  // semanticsLabel: 'Fetching matches',
+        body: isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                    // semanticsLabel: 'Fetching matches',
 
-                  ),
-            )
-          : ListView(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              children: [
-                Row(
-                  children: [
-                    TextButton(onPressed: () {}, child: mainLogo()),
-                  ],
-                ),
-                refreshButton(onpressed: soccerData.load),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                ),
-                Container(
-                  width: displayWidth(context),
-                  height: 60,
-                  child: Center(
-                    child: SingleChildScrollView(
-                        controller: sc,
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            for (var i = 0; i < buttons.length; i++)
-                              dayButton(
-                                onPressed: () => context
-                                    .read(soccerDataProvider)
-                                    .changeDay(buttons[i]['val']),
-                                text: buttons[i]['text'],
-                                selected: buttons[i]['val'] == day,
-                              ),
-                          ],
-                        )),
-                  ),
-                ),
-                if (soccerData.homeData != [])
-                  for (var i in soccerData.homeData) i
-                else
-                  Container(
-                    height: displayHeight(context) * .9,
-                    child: Center(
-                      child: Text('Sorry no streams right now'),
                     ),
-                  )
-              ],
-            ),
-    );
+              )
+            : Column(
+                children: [
+                  if (soccerData.homeData != [])
+                    Expanded(
+                      child: Container(
+                        // height: displayHeight(context),
+                        child: ListView.builder(
+                          itemCount: soccerData.homeData.length,
+                          itemBuilder: (context, index) {
+                            if (index == 0)
+                              return Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {}, child: mainLogo()),
+                                    ],
+                                  ),
+                                  refreshButton(onpressed: soccerData.load),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 20),
+                                  ),
+                                  Container(
+                                    width: displayWidth(context),
+                                    height: 60,
+                                    child: Center(
+                                      child: SingleChildScrollView(
+                                          controller: sc,
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: [
+                                              for (var i = 0;
+                                                  i < buttons.length;
+                                                  i++)
+                                                dayButton(
+                                                  onPressed: () => context
+                                                      .read(soccerDataProvider)
+                                                      .changeDay(
+                                                          buttons[i]['val']),
+                                                  text: buttons[i]['text'],
+                                                  selected:
+                                                      buttons[i]['val'] == day,
+                                                ),
+                                            ],
+                                          )),
+                                    ),
+                                  ),
+                                  soccerData.homeData[index]
+                                ],
+                              );
+                            return soccerData.homeData[index];
+                          },
+                        ),
+                      ),
+                    )
+                  else
+                    Container(
+                      height: displayHeight(context) * .9,
+                      child: Center(
+                        child: Text('Sorry no streams right now'),
+                      ),
+                    )
+                ],
+              ));
   }
 }
