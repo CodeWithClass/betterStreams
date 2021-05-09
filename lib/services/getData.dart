@@ -132,7 +132,8 @@ Future<ServerResponse> scrapeLink(String url) async {
   final dev = 'http://localhost:5001/coderehack-dotcom/us-central1';
 
   try {
-    final response = await http.Client().get(Uri.parse('$prod/test?url=$url'));
+    final response = await http.Client()
+        .get(Uri.parse('$prod/test/betterstreamsnow?url=$url'));
     if (response.statusCode == 200) {
       final document = parse(response.body);
       final actualLink = document.getElementById('skip-btn').attributes['href'];
