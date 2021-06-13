@@ -33,6 +33,10 @@ class MainDataNotifier extends ChangeNotifier {
     load();
   }
 
+  void setLoading(val) {
+    _isLoading = val;
+  }
+
   void load() async {
     _isLoading = true;
     notifyListeners();

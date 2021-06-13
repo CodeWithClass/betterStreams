@@ -1,4 +1,5 @@
 import 'package:betterstreams/services/getData.dart';
+import 'package:betterstreams/state/soccerData.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:betterstreams/helpers/displaySize.dart';
@@ -24,6 +25,8 @@ class Link extends ConsumerWidget {
       this.channel});
 
   Widget build(BuildContext context, ScopedReader watch) {
+    final soccerData = watch(soccerDataProvider);
+
     final _name = name.split(' ');
     name = _name[0].trim();
     double mx = displayWidth(context) * .15;
@@ -41,9 +44,11 @@ class Link extends ConsumerWidget {
             ))),
         // autofocus: true,
         onPressed: () async {
+          soccerData.setLoading(true);
           var res = await scrapeLink(url);
-          // html.window.open(url, '');
-          html.window.open(res.data, '');
+          soccerData.setLoading(false);
+          if (res.status) return html.window.open(res.data, '');
+          html.window.open(url, '');
         },
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Flexible(

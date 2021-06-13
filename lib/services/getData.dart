@@ -126,14 +126,19 @@ Future<ServerResponse> getEventLinks(int id) async {
 //scraping
 // ignore: non_constant_identifier_names
 Future<ServerResponse> scrapeLink(String url) async {
+  final Map<String, String> requestHeaders = {
+    'Content-type': 'application/json',
+    'Accept': 'application/json',
+  };
   // final test_url = 'https://tinyurl.is/JRwu?sport=soccer';
   final prod = 'https://us-central1-coderehack-dotcom.cloudfunctions.net';
   // ignore: unused_local_variable
   final dev = 'http://localhost:5001/coderehack-dotcom/us-central1';
 
   try {
-    final response = await http.Client()
-        .get(Uri.parse('$prod/test/betterstreamsnow?url=$url'));
+    final response = await http.Client().get(
+        Uri.parse('$prod/test/betterstreamsnow?url=$url'),
+        headers: requestHeaders);
     if (response.statusCode == 200) {
       final document = parse(response.body);
       final actualLink = document.getElementById('skip-btn').attributes['href'];
